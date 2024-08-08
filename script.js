@@ -10,10 +10,15 @@ document.querySelectorAll("nav ul li a").forEach((anchor) => {
 });
 
 // Back-to-top button functionality
-const backToTopButton = document.createElement("button");
-backToTopButton.textContent = "↑";
-backToTopButton.classList.add("back-to-top");
-document.body.appendChild(backToTopButton);
+const backToTopButton = document.querySelector(".back-to-top");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopButton.style.display = "block";
+  } else {
+    backToTopButton.style.display = "none";
+  }
+});
 
 backToTopButton.addEventListener("click", () => {
   window.scrollTo({
@@ -22,10 +27,16 @@ backToTopButton.addEventListener("click", () => {
   });
 });
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTopButton.style.display = "block";
-  } else {
-    backToTopButton.style.display = "none";
-  }
+// Hamburger menu toggle
+const hamburger = document.querySelector(".hamburger");
+const navLinks = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+});
+
+document.querySelectorAll(".nav-links li a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+  });
 });
